@@ -175,9 +175,24 @@
                    completionHandler:nil];
 }
 
+- (IBAction)seamlessEnable:(id)sender {
+    [NSApp setActivationPolicy:NSApplicationActivationPolicyAccessory];
+    
+    // install status bar item
+    if(self.statusItem == nil) {
+        self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+        [self.statusItem setTitle:@"ChitChat"];
+        [self.statusItem setHighlightMode:YES];
+        [self.statusItem setTarget:self];
+        [self.statusItem setAction:@selector(showApp)];
+    }
+}
+
+- (void)showApp {
+    [NSApp activateIgnoringOtherApps:YES];
+}
+
 #pragma mark WebView Delegate Methods
-
-
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSURL *url = navigationAction.request.URL;
     

@@ -2,6 +2,8 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@property (strong, nonatomic) NSStatusItem* statusItem;
+
 - (void)setActiveConversationAtIndex:(NSString*)index;
 
 @end
