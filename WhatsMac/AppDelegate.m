@@ -79,7 +79,7 @@
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
     
     //Whatsapp web only works with specific user agents
-    _webView._customUserAgent = @"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36";
+    _webView._customUserAgent = @"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12";
     
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://web.whatsapp.com"]];
     [_webView loadRequest:urlRequest];
