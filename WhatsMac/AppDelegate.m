@@ -90,6 +90,7 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
     [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
+    [self updateSeamless:NO];
     [self.window makeKeyAndOrderFront:self];
 }
 
@@ -192,6 +193,25 @@
     [NSApp activateIgnoringOtherApps:YES];
 }
 
+- (void)updateSeamless:(BOOL)add {
+    static int count = 0;
+    if(add) {
+        count++;
+        self.notificationCount = [NSString stringWithFormat:@"%d", count];
+    } else {
+        count = 0;
+        self.notificationCount = @"";
+    }
+    
+    if(self.statusItem) {
+        if(count > 0) {
+            [self.statusItem setTitle:[NSString stringWithFormat:@"ChitChat (%d)", count]];
+        } else {
+            [self.statusItem setTitle:@"ChitChat"];
+        }
+    }
+}
+
 #pragma mark WebView Delegate Methods
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSURL *url = navigationAction.request.URL;
@@ -238,6 +258,8 @@
     notification.title = messageBody[0];
     notification.subtitle = messageBody[1];
     [[NSUserNotificationCenter defaultUserNotificationCenter] scheduleNotification:notification];
+    
+    [self updateSeamless:YES];
 }
 
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)())completionHandler {
