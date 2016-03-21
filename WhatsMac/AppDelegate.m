@@ -158,12 +158,12 @@ NSString* const WAMShouldHideStatusItem = @"WAMShouldHideStatusItem";
 }
 
 - (void)createStatusItem {
-    NSImage* image = [NSImage imageNamed:@"statusIconRead"];
+    /*NSImage* image = [NSImage imageNamed:@"statusIconRead"];
     [image setTemplate:YES];
 
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     [self.statusItem.button setImage:image];
-    self.statusItem.button.action = @selector(showAppWindow:);
+    self.statusItem.button.action = @selector(showAppWindow:);*/
 }
 
 - (IBAction)toggleStatusItem:(id)sender {
